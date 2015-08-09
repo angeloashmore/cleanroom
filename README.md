@@ -129,6 +129,12 @@ const user = UserSignUp.runExplicit(inputs);
   }
   ~~~
 
+4. Initialize your command:
+
+  ~~~ js
+  Cleanroom.initCommand(YourCommand);
+  ~~~
+
 ## What about validation errors?
 
 Validations are handled by the [skeemas][2] library by [Prestaul][3].
