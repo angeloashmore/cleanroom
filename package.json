@@ -1,0 +1,43 @@
+{
+  "name": "cleanroom",
+  "version": "0.0.1",
+  "description": "Compose your business logic into commands that sanitize and validate input.",
+  "main": "src/cleanroom.js",
+  "scripts": {
+    "lint": "eslint src test",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angeloashmore/cleanroom.git"
+  },
+  "keywords": [
+    "business",
+    "logic",
+    "sanitize",
+    "validate",
+    "input",
+    "container",
+    "separate",
+    "mutation",
+    "mutations"
+  ],
+  "author": "Angelo Ashmore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angeloashmore/cleanroom/issues"
+  },
+  "homepage": "https://github.com/angeloashmore/cleanroom#readme",
+  "devDependencies": {
+    "babel": "^5.8.20",
+    "babel-eslint": "^4.0.5",
+    "chai": "^3.2.0",
+    "eslint": "^1.0.0",
+    "eslint-config-airbnb": "0.0.7",
+    "eslint-plugin-react": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "es6-error": "^1.0.0"
+  }
+}
