@@ -1,6 +1,6 @@
 {
   "name": "cleanroom",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Compose your business logic into commands that sanitize and validate input.",
   "main": "src/Cleanroom.js",
   "scripts": {
