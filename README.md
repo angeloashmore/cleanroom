@@ -1,6 +1,11 @@
 # Cleanroom
 Compose your business logic into commands that validate input.
 
+## Status
+
+[![npm version](https://badge.fury.io/js/cleanroom.svg)](http://badge.fury.io/js/cleanroom)
+[![Build Status](https://secure.travis-ci.org/angeloashmore/cleanroom.svg?branch=master)](http://travis-ci.org/angeloashmore/cleanroom?branch=master)
+
 ## Installation
 
 ~~~ shell
