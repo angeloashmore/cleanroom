@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import WelcomeMessage from '../fixtures/WelcomeMessage';
-import Outcome from '../../src/Outcome';
-import { ValidationError } from '../../src/errors';
+import Outcome from '../../src/cleanroom/Outcome';
+import { ValidationError } from '../../src/cleanroom/errors';
 
 const validInputs = {
   name: 'Angelo Ashmore',

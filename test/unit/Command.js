@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Command from '../../src/Command';
-import { NotImplementedError, NotUsedError } from '../../src/errors';
+import Command from '../../src/cleanroom/Command';
+import { NotImplementedError, NotUsedError } from '../../src/cleanroom/errors';
 
 describe('Command', () => {
   describe('::schema', () => {

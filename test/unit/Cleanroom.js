@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Cleanroom from '../../src/Cleanroom';
-import Command from '../../src/Command';
-import { NotUsedError } from '../../src/errors';
+import Command from '../../src/cleanroom/Command';
+import { NotUsedError } from '../../src/cleanroom/errors';
 
 describe('Cleanroom', () => {
   describe('::Command', () => {

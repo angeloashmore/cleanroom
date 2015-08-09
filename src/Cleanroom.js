@@ -1,5 +1,5 @@
-import Command from './Command';
-import { NotUsedError } from './errors';
+import Command from './cleanroom/Command';
+import { NotUsedError } from './cleanroom/errors';
 
 export default class Cleanroom {
   static Command = Command;
