@@ -31,7 +31,7 @@ export default class Command {
     };
   }
 
-  constructor(ignoreError = false) {
-    if (!ignoreError) throw new NotUsedError();
+  constructor() {
+    throw new NotUsedError();
   }
 }
