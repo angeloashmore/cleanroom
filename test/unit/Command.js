@@ -1,11 +1,27 @@
 import { expect } from 'chai';
 import Command from '../../src/cleanroom/Command';
-import { NotImplementedError, NotUsedError } from '../../src/cleanroom/errors';
+import {
+  CommandNotInitializedError,
+  NotImplementedError,
+  NotUsedError
+} from '../../src/cleanroom/errors';
 
 describe('Command', () => {
   describe('::schema', () => {
     it('should return an empty object', () => {
       expect(Command.schema).to.deep.equal({});
+    });
+  });
+
+  describe('::run()', () => {
+    it('should throw a CommandNotInitializedError', () => {
+      expect(Command.run).to.throw(CommandNotInitializedError);
+    });
+  });
+
+  describe('::runExplicit()', () => {
+    it('should throw a CommandNotInitializedError', () => {
+      expect(Command.runExplicit).to.throw(CommandNotInitializedError);
     });
   });
 

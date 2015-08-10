@@ -1,12 +1,25 @@
 import skeemas from 'skeemas';
 import Outcome from './Outcome';
-import { NotImplementedError, NotUsedError, ValidationError } from './errors';
+import {
+  CommandNotInitializedError,
+  NotImplementedError,
+  NotUsedError,
+  ValidationError
+} from './errors';
 
 export default class Command {
   static schema = {}
 
   static execute() {
     throw new NotImplementedError();
+  }
+
+  static run() {
+    throw new CommandNotInitializedError();
+  }
+
+  static runExplicit() {
+    throw new CommandNotInitializedError();
   }
 
   static _run(Class) {
