@@ -22,8 +22,7 @@ export default class Command {
         const validation = skeemas.validate(inputs, Class.schema);
 
         if (validation.valid) {
-          const result = Class.execute(inputs);
-          resolve(result);
+          resolve(Class.execute(inputs));
         } else {
           reject(validation.errors);
         }
