@@ -37,6 +37,8 @@ class UserSignUp extends Cleanroom.Command {
   }
 }
 
+Cleanroom.initCommand(UserSignUp);
+
 // Sometime later in a file far, far away....
 function signUpAction(inputs) {
   const outcome = UserSignUp.run(inputs)
