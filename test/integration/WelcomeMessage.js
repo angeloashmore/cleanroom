@@ -1,7 +1,5 @@
 import { expect } from 'chai';
 import WelcomeMessage from '../fixtures/WelcomeMessage';
-import Outcome from '../../src/cleanroom/Outcome';
-import { ValidationError } from '../../src/cleanroom/errors';
 
 const validInputs = {
   name: 'Angelo Ashmore',
@@ -16,42 +14,36 @@ const invalidInputs = {
 describe('WelcomeMessage', () => {
   describe('::run()', () => {
     describe('with valid inputs', () => {
-      it('should return an instance of Outcome with the correct properties', () => {
-        const outcome = WelcomeMessage.run(validInputs);
+      it('should return a Promise with the correct resolved value', done => {
+        let resolved;
+        let rejected;
 
-        expect(outcome).to.be.an.instanceOf(Outcome);
-        expect(outcome.success).to.be.true;
-        expect(outcome.result).to.equal('Welcome, Angelo Ashmore (name@example.com)');
-        expect(outcome.errors).to.deep.equal([]);
+        const outcome = WelcomeMessage.run(validInputs)
+          .then(value => resolved = value)
+          .catch(errors => rejected = errors)
+          .then(() => {
+            expect(outcome).to.be.an.instanceOf(Promise);
+            expect(resolved).to.equal('Welcome, Angelo Ashmore (name@example.com)');
+            expect(rejected).to.be.undefined;
+          })
+          .then(done).catch(done);
       });
     });
 
     describe('with invalid inputs', () => {
-      it('should return an instance of Outcome with the correct properties', () => {
-        const outcome = WelcomeMessage.run(invalidInputs);
+      it('should return an instance of Outcome with the correct properties', done => {
+        let resolved;
+        let rejected;
 
-        expect(outcome).to.be.an.instanceOf(Outcome);
-        expect(outcome.success).to.be.false;
-        expect(outcome.result).to.be.null;
-        expect(outcome.errors.length).to.equal(2);
-      });
-    });
-  });
-
-  describe('::runExplicit()', () => {
-    describe('with valid inputs', () => {
-      it('should return the correct message', () => {
-        const outcome = WelcomeMessage.runExplicit(validInputs);
-
-        expect(outcome).to.equal('Welcome, Angelo Ashmore (name@example.com)');
-      });
-    });
-
-    describe('with invalid inputs', () => {
-      it('should throw a ValidationError', () => {
-        const outcome = () => WelcomeMessage.runExplicit(invalidInputs);
-
-        expect(outcome).to.throw(ValidationError);
+        const outcome = WelcomeMessage.run(invalidInputs)
+          .then(value => resolved = value)
+          .catch(errors => rejected = errors)
+          .then(() => {
+            expect(outcome).to.be.an.instanceOf(Promise);
+            expect(resolved).to.be.undefined;
+            expect(rejected.length).to.equal(2);
+          })
+          .then(done).catch(done);
       });
     });
   });
