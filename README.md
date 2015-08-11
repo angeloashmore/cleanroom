@@ -24,7 +24,8 @@ class UserSignUp extends Cleanroom.Command {
       name: { type: 'string' },
       newsletter_subscribe: { type: 'boolean' }
     },
-    required: ['email', 'name']
+    required: ['email', 'name'],
+    additionalProperties: false,
   }
 
   static execute(inputs) {
@@ -56,6 +57,8 @@ Some things to note about the example:
 
 * Inputs are validated using a JSON Schema
 * We can guarentee inputs pass the schema before reaching the business logic
+* If `additionalProperties` is set to false, any additional properties will be
+  removed.
 * This code is completely re-usable in other contexts
 
 ## How do I call commands?
@@ -154,9 +157,9 @@ UserSignUp.runPromise(inputs)
 
 ## What about validation errors?
 
-Validations are handled by the [skeemas][2] library by [Prestaul][3].
+Validations are handled by the [ajv][2] library by [epoberezkin][3].
 
-Please see the skeemas source code until an overview of validation errors is written.
+Please see the ajv documenation until an overview of validation errors is written.
 
 ## Acknowledgements
 
@@ -164,6 +167,6 @@ Highly inspired by [cypriss/mutations][4] from the Ruby world.
 
 [0]: http://json-schema.org
 [1]: http://spacetelescope.github.io/understanding-json-schema
-[2]: https://github.com/Prestaul/skeemas
-[3]: https://github.com/Prestaul
+[2]: https://github.com/epoberezkin/ajv
+[3]: https://github.com/epoberezkin
 [4]: https://github.com/cypriss/mutations

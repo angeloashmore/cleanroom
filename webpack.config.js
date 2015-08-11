@@ -11,13 +11,14 @@ module.exports = {
     filename: 'cleanroom.js',
     publicPath: '/dist/',
     pathinfo: false,
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
 
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?stage=0' },
-    ]
+      { test: /\.json?$/, loader: "json" },
+    ],
   },
 
   target: 'node',
@@ -27,7 +28,7 @@ module.exports = {
 
   stats: {
     colors: true,
-    reasons: false
+    reasons: false,
   },
 
   resolve: {
@@ -42,5 +43,5 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-  ]
+  ],
 };

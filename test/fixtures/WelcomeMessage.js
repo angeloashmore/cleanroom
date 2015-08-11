@@ -7,6 +7,7 @@ export default class WelcomeMessage extends Cleanroom.Command {
       email: { type: 'string', format: 'email' },
     },
     required: ['name', 'email'],
+    additionalProperties: false,
   };
 
   static execute(inputs) {

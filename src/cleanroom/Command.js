@@ -1,4 +1,4 @@
-import skeemas from 'skeemas';
+import ajv from './ajv';
 import Outcome from './Outcome';
 import {
   CommandNotInitializedError,
@@ -28,9 +28,10 @@ export default class Command {
 
   static _run(Class) {
     return function run(inputs) {
-      const validation = skeemas.validate(inputs, Class.schema);
-      const result = validation.valid ? Class.execute(inputs) : null;
-      return new Outcome(validation.valid, result, validation.errors, inputs);
+      const validate = ajv.compile(Class.schema);
+      const valid = validate(inputs);
+      const result = valid ? Class.execute(inputs) : null;
+      return new Outcome(valid, result, validate.errors, inputs);
     };
   }
 

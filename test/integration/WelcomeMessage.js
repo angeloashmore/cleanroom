@@ -3,17 +3,27 @@ import WelcomeMessage from '../fixtures/WelcomeMessage';
 import Outcome from '../../src/cleanroom/Outcome';
 import { ValidationError } from '../../src/cleanroom/errors';
 
-const validInputs = {
-  name: 'Angelo Ashmore',
-  email: 'name@example.com',
-};
-
-const invalidInputs = {
-  name: 0,
-  email: 'invalid_email',
-};
-
 describe('WelcomeMessage', () => {
+  let validInputs;
+  let validInputsWithoutExtras;
+  let invalidInputs;
+
+  beforeEach(() => {
+    validInputs = {
+      name: 'Angelo Ashmore',
+      email: 'name@example.com',
+      extraInput: 'extraInput',
+    };
+
+    validInputsWithoutExtras = Object.assign({}, validInputs);
+    delete validInputsWithoutExtras.extraInput;
+
+    invalidInputs = {
+      name: 0,
+      email: 'invalid_email',
+    };
+  });
+
   describe('::run()', () => {
     describe('with valid inputs', () => {
       it('should return an instance of Outcome with the correct properties', () => {
@@ -22,7 +32,8 @@ describe('WelcomeMessage', () => {
         expect(outcome).to.be.an.instanceOf(Outcome);
         expect(outcome.success).to.be.true;
         expect(outcome.result).to.equal('Welcome, Angelo Ashmore (name@example.com)');
-        expect(outcome.errors).to.deep.equal([]);
+        expect(outcome.errors).to.be.null;
+        expect(outcome.inputs).to.deep.equal(validInputsWithoutExtras);
       });
     });
 
