@@ -1,5 +1,6 @@
 import ajv from './ajv';
 import defaults from 'json-schema-defaults';
+import merge from 'deepmerge';
 import Outcome from './Outcome';
 import {
   CommandNotInitializedError,
@@ -29,7 +30,7 @@ export default class Command {
 
   static _run(Class) {
     return function run(inputs) {
-      inputs = Object.assign(defaults(Class.schema), inputs);
+      inputs = merge(defaults(Class.schema), inputs);
 
       const validate = ajv.compile(Class.schema);
       const valid = validate(inputs);

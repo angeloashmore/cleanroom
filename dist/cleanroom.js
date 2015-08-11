@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("url")) : factory(root["url"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_49__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_50__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -345,7 +345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var url = __webpack_require__(49)
+	var url = __webpack_require__(50)
 	  , equal = __webpack_require__(3)
 	  , util = __webpack_require__(1);
 
@@ -1028,7 +1028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    function addInitialSchemas() {
 	        if (self.opts.meta !== false)
-	            addMetaSchema(__webpack_require__(46), META_SCHEMA_ID, true);
+	            addMetaSchema(__webpack_require__(47), META_SCHEMA_ID, true);
 
 	        var optsSchemas = self.opts.schemas;
 	        if (!optsSchemas) return;
@@ -3245,9 +3245,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _ajv2 = _interopRequireDefault(_ajv);
 
-	var _jsonSchemaDefaults = __webpack_require__(47);
+	var _jsonSchemaDefaults = __webpack_require__(48);
 
 	var _jsonSchemaDefaults2 = _interopRequireDefault(_jsonSchemaDefaults);
+
+	var _deepmerge = __webpack_require__(46);
+
+	var _deepmerge2 = _interopRequireDefault(_deepmerge);
 
 	var _Outcome = __webpack_require__(40);
 
@@ -3280,7 +3284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: '_run',
 	    value: function _run(Class) {
 	      return function run(inputs) {
-	        inputs = Object.assign((0, _jsonSchemaDefaults2['default'])(Class.schema), inputs);
+	        inputs = (0, _deepmerge2['default'])((0, _jsonSchemaDefaults2['default'])(Class.schema), inputs);
 
 	        var validate = _ajv2['default'].compile(Class.schema);
 	        var valid = validate(inputs);
@@ -3537,6 +3541,64 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports === 'object') {
+	        module.exports = factory();
+	    } else {
+	        root.deepmerge = factory();
+	    }
+	}(this, function () {
+
+	return function deepmerge(target, src) {
+	    var array = Array.isArray(src);
+	    var dst = array && [] || {};
+
+	    if (array) {
+	        target = target || [];
+	        dst = dst.concat(target);
+	        src.forEach(function(e, i) {
+	            if (typeof dst[i] === 'undefined') {
+	                dst[i] = e;
+	            } else if (typeof e === 'object') {
+	                dst[i] = deepmerge(target[i], e);
+	            } else {
+	                if (target.indexOf(e) === -1) {
+	                    dst.push(e);
+	                }
+	            }
+	        });
+	    } else {
+	        if (target && typeof target === 'object') {
+	            Object.keys(target).forEach(function (key) {
+	                dst[key] = target[key];
+	            })
+	        }
+	        Object.keys(src).forEach(function (key) {
+	            if (typeof src[key] !== 'object' || !src[key]) {
+	                dst[key] = src[key];
+	            }
+	            else {
+	                if (!target[key]) {
+	                    dst[key] = src[key];
+	                } else {
+	                    dst[key] = deepmerge(target[key], src[key]);
+	                }
+	            }
+	        });
+	    }
+
+	    return dst;
+	}
+
+	}));
+
+
+/***/ },
+/* 47 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3762,14 +3824,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(48);
+	module.exports = __webpack_require__(49);
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(root, factory) {
@@ -3967,7 +4029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	module.exports = require("url");
