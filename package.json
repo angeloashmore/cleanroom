@@ -2,10 +2,11 @@
   "name": "cleanroom",
   "version": "0.2.0",
   "description": "Compose your business logic into commands that validate input.",
-  "main": "src/Cleanroom.js",
+  "main": "dist/cleanroom.js",
   "scripts": {
     "lint": "eslint src test",
-    "test": "mocha"
+    "test": "mocha",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,15 @@
   "homepage": "https://github.com/angeloashmore/cleanroom#readme",
   "devDependencies": {
     "babel": "^5.8.20",
+    "babel-core": "^5.8.22",
     "babel-eslint": "^4.0.5",
+    "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
     "eslint": "^1.0.0",
     "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-react": "^3.2.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "webpack": "^1.11.0"
   },
   "dependencies": {
     "es6-error": "^1.0.0",
