@@ -1,4 +1,5 @@
 import ajv from './ajv';
+import defaults from 'json-schema-defaults';
 import Outcome from './Outcome';
 import {
   CommandNotInitializedError,
@@ -28,9 +29,12 @@ export default class Command {
 
   static _run(Class) {
     return function run(inputs) {
+      inputs = Object.assign(defaults(Class.schema), inputs);
+
       const validate = ajv.compile(Class.schema);
       const valid = validate(inputs);
       const result = valid ? Class.execute(inputs) : null;
+
       return new Outcome(valid, result, validate.errors, inputs);
     };
   }

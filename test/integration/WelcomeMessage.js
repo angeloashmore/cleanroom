@@ -5,7 +5,7 @@ import { ValidationError } from '../../src/cleanroom/errors';
 
 describe('WelcomeMessage', () => {
   let validInputs;
-  let validInputsWithoutExtras;
+  let validInputsAfterRun;
   let invalidInputs;
 
   beforeEach(() => {
@@ -15,13 +15,13 @@ describe('WelcomeMessage', () => {
       extraInput: 'extraInput',
     };
 
-    validInputsWithoutExtras = Object.assign({}, validInputs);
-    delete validInputsWithoutExtras.extraInput;
+    validInputsAfterRun = Object.assign({}, validInputs);
+    validInputsAfterRun.private = true;
+    delete validInputsAfterRun.extraInput;
 
-    invalidInputs = {
-      name: 0,
-      email: 'invalid_email',
-    };
+    invalidInputs = Object.assign({}, validInputs);
+    invalidInputs.name = 0;
+    invalidInputs.email = 'invalid_email';
   });
 
   describe('::run()', () => {
@@ -33,7 +33,7 @@ describe('WelcomeMessage', () => {
         expect(outcome.success).to.be.true;
         expect(outcome.result).to.equal('Welcome, Angelo Ashmore (name@example.com)');
         expect(outcome.errors).to.be.null;
-        expect(outcome.inputs).to.deep.equal(validInputsWithoutExtras);
+        expect(outcome.inputs).to.deep.equal(validInputsAfterRun);
       });
     });
 

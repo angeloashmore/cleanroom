@@ -2,11 +2,13 @@ import Cleanroom from '../../src/Cleanroom';
 
 export default class WelcomeMessage extends Cleanroom.Command {
   static schema = {
+    type: 'object',
     properties: {
       name: { type: 'string' },
       email: { type: 'string', format: 'email' },
+      private: { type: 'boolean', default: true },
     },
-    required: ['name', 'email'],
+    required: ['name', 'email', 'private'],
     additionalProperties: false,
   };
 
