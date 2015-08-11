@@ -60,14 +60,14 @@ Some things to note about the example:
 
 ## How do I call commands?
 
-You have two choices. Given a command UserSignUp, you can do this:
+You have three choices. Given a command UserSignUp, you can do this:
 
 ~~~ js
 const outcome = UserSignUp.run(inputs);
 if (outcome.success) {
-  return outcome.result;
+  console.log(outcome.result);
 } else {
-  return outcome.errors;
+  console.error(outcome.errors);
 }
 ~~~
 
@@ -75,7 +75,22 @@ Or, you can do this:
 
 ~~~ js
 // returns the result of ::execute(), or throws ValidationError
-const user = UserSignUp.runExplicit(inputs);
+try {
+  const result = UserSignUp.runExplicitly(inputs);
+  console.log(result);
+} catch (e) {
+  console.error(e);
+}
+~~~
+
+Or, you can do this:
+
+~~~ js
+// returns a Promise with the result of ::execute() as the resolved value, or
+// rejets with the validation errors.
+UserSignUp.runPromise(inputs)
+  .then(console.log)
+  .catch(console.error);
 ~~~
 
 ## How do I define commands?

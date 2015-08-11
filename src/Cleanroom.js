@@ -6,7 +6,8 @@ export default class Cleanroom {
 
   static initCommand(Class) {
     Class.run = Class._run(Class);
-    Class.runExplicit = Class._runExplicit(Class);
+    Class.runExplicitly = Class._runExplicitly(Class);
+    Class.runPromise = Class._runPromise(Class);
   }
 
   constructor() {

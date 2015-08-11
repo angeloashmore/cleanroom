@@ -38,10 +38,10 @@ describe('WelcomeMessage', () => {
     });
   });
 
-  describe('::runExplicit()', () => {
+  describe('::runExplicitly()', () => {
     describe('with valid inputs', () => {
       it('should return the correct message', () => {
-        const outcome = WelcomeMessage.runExplicit(validInputs);
+        const outcome = WelcomeMessage.runExplicitly(validInputs);
 
         expect(outcome).to.equal('Welcome, Angelo Ashmore (name@example.com)');
       });
@@ -49,9 +49,45 @@ describe('WelcomeMessage', () => {
 
     describe('with invalid inputs', () => {
       it('should throw a ValidationError', () => {
-        const outcome = () => WelcomeMessage.runExplicit(invalidInputs);
+        const outcome = () => WelcomeMessage.runExplicitly(invalidInputs);
 
         expect(outcome).to.throw(ValidationError);
+      });
+    });
+  });
+
+  describe('::runPromise()', () => {
+    describe('with valid inputs', () => {
+      it('should return a Promise with the correct resolved value', done => {
+        let resolved;
+        let rejected;
+
+        const outcome = WelcomeMessage.runPromise(validInputs)
+          .then(value => resolved = value)
+          .catch(errors => rejected = errors)
+          .then(() => {
+            expect(outcome).to.be.an.instanceOf(Promise);
+            expect(resolved).to.equal('Welcome, Angelo Ashmore (name@example.com)');
+            expect(rejected).to.be.undefined;
+          })
+          .then(done).catch(done);
+      });
+    });
+
+    describe('with invalid inputs', () => {
+      it('should return a Promise with the correct rejected value', done => {
+        let resolved;
+        let rejected;
+
+        const outcome = WelcomeMessage.runPromise(invalidInputs)
+          .then(value => resolved = value)
+          .catch(errors => rejected = errors)
+          .then(() => {
+            expect(outcome).to.be.an.instanceOf(Promise);
+            expect(resolved).to.be.undefined;
+            expect(rejected.length).to.equal(2);
+          })
+          .then(done).catch(done);
       });
     });
   });

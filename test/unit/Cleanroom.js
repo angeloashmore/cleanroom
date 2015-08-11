@@ -11,12 +11,13 @@ describe('Cleanroom', () => {
   });
 
   describe('::initCommand()', () => {
-    it('should add ::run and ::runExplicit to a Command', () => {
+    it('should add ::run, ::runExplicitly, and ::runPromise to a Command', () => {
       class TestCommand extends Cleanroom.Command {}
       Cleanroom.initCommand(TestCommand);
 
       expect(TestCommand.run).to.be.a('function');
-      expect(TestCommand.runExplicit).to.be.a('function');
+      expect(TestCommand.runExplicitly).to.be.a('function');
+      expect(TestCommand.runPromise).to.be.a('function');
     });
   });
 

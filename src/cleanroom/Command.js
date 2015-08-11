@@ -18,7 +18,11 @@ export default class Command {
     throw new CommandNotInitializedError();
   }
 
-  static runExplicit() {
+  static runExplicitly() {
+    throw new CommandNotInitializedError();
+  }
+
+  static runPromise() {
     throw new CommandNotInitializedError();
   }
 
@@ -30,13 +34,25 @@ export default class Command {
     };
   }
 
-  static _runExplicit(Class) {
-    return function runExplicit(inputs) {
+  static _runExplicitly(Class) {
+    return function runExplicitly(inputs) {
       const outcome = Class.run(inputs);
 
       if (!outcome.success) throw new ValidationError(outcome.errors);
 
       return outcome.result;
+    };
+  }
+
+  static _runPromise(Class) {
+    return function runPromise(inputs) {
+      return new Promise(function promise(resolve, reject) {
+        const outcome = Class.run(inputs);
+
+        if (!outcome.success) reject(outcome.errors);
+
+        resolve(outcome.result);
+      });
     };
   }
 
