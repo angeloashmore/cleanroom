@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("punycode")) : factory(root["punycode"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_22__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_23__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -430,11 +430,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.NotUsedError = _NotUsedError3['default'];
 
+	var _ValidationError2 = __webpack_require__(13);
+
+	var _ValidationError3 = _interopRequireDefault(_ValidationError2);
+
+	exports.ValidationError = _ValidationError3['default'];
+
 /***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jsonPointer = __webpack_require__(14);
+	var jsonPointer = __webpack_require__(15);
 
 	var protoJsonRefs = {
 		add: function(uri, subject) {
@@ -541,13 +547,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.types = {
 		'any': function() { return true; },
-		'array': __webpack_require__(17),
-		'boolean': __webpack_require__(18),
+		'array': __webpack_require__(18),
+		'boolean': __webpack_require__(19),
 		'integer': __webpack_require__(7),
-		'null': __webpack_require__(19),
+		'null': __webpack_require__(20),
 		'number': __webpack_require__(7),
-		'object': __webpack_require__(20),
-		'string': __webpack_require__(21)
+		'object': __webpack_require__(21),
+		'string': __webpack_require__(22)
 	};
 
 	exports.deepEqual = __webpack_require__(5);
@@ -644,7 +650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _skeemas = __webpack_require__(13);
+	var _skeemas = __webpack_require__(14);
 
 	var _skeemas2 = _interopRequireDefault(_skeemas);
 
@@ -855,8 +861,47 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _es6Error = __webpack_require__(1);
+
+	var _es6Error2 = _interopRequireDefault(_es6Error);
+
+	var ValidationError = (function (_ExtendableError) {
+	  _inherits(ValidationError, _ExtendableError);
+
+	  function ValidationError() {
+	    var message = arguments.length <= 0 || arguments[0] === undefined ? 'Invalid inputs' : arguments[0];
+
+	    _classCallCheck(this, ValidationError);
+
+	    _get(Object.getPrototypeOf(ValidationError.prototype), 'constructor', this).call(this, message);
+	  }
+
+	  return ValidationError;
+	})(_es6Error2['default']);
+
+	exports['default'] = ValidationError;
+	module.exports = exports['default'];
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var validators = __webpack_require__(6),
-		validationContext = __webpack_require__(15),
+		validationContext = __webpack_require__(16),
 		jsonRefs = __webpack_require__(4);
 
 	var protoValidator = {
@@ -926,7 +971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	function fastMap(array, fn) {
@@ -1000,10 +1045,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var validationResult = __webpack_require__(16),
+	var validationResult = __webpack_require__(17),
 		jsonRefs = __webpack_require__(4);
 
 	var protoContext = {
@@ -1056,7 +1101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	function errorToString() {
@@ -1088,7 +1133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var validateBase = __webpack_require__(2),
@@ -1231,7 +1276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	function validateBoolean(context, subject, schema) {
@@ -1249,7 +1294,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	function validateNull(context, subject, schema) {
@@ -1267,7 +1312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var validateBase = __webpack_require__(2);
@@ -1466,10 +1511,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var decode = __webpack_require__(22).ucs2.decode;
+	var decode = __webpack_require__(23).ucs2.decode;
 
 
 	function minLength(context, subject, schema) {
@@ -1522,7 +1567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = require("punycode");
