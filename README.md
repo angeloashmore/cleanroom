@@ -89,8 +89,8 @@ try {
 Or, you can do this:
 
 ~~~ js
-// returns a Promise with the result of ::execute() as the resolved value, or
-// rejets with the validation errors.
+// returns a Promise with the result of ::execute() as the resolved value,
+// or rejects with the validation errors.
 UserSignUp.runPromise(inputs)
   .then(console.log)
   .catch(console.error);
