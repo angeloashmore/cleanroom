@@ -19,6 +19,12 @@ describe('Command', () => {
     });
   });
 
+  describe('::runExplicit()', () => {
+    it('should throw a CommandNotInitializedError', () => {
+      expect(Command.runExplicit).to.throw(CommandNotInitializedError);
+    });
+  });
+
   describe('::execute()', () => {
     it('should return a function', () => {
       expect(Command.execute).to.be.a('function');

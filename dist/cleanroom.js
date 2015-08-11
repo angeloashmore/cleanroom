@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("punycode")) : factory(root["punycode"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_21__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_22__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -77,6 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'initCommand',
 	    value: function initCommand(Class) {
 	      Class.run = Class._run(Class);
+	      Class.runExplicit = Class._runExplicit(Class);
 	    }
 	  }, {
 	    key: 'Command',
@@ -411,19 +412,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _CommandNotInitializedError2 = __webpack_require__(9);
+	var _CommandNotInitializedError2 = __webpack_require__(10);
 
 	var _CommandNotInitializedError3 = _interopRequireDefault(_CommandNotInitializedError2);
 
 	exports.CommandNotInitializedError = _CommandNotInitializedError3['default'];
 
-	var _NotImplementedError2 = __webpack_require__(10);
+	var _NotImplementedError2 = __webpack_require__(11);
 
 	var _NotImplementedError3 = _interopRequireDefault(_NotImplementedError2);
 
 	exports.NotImplementedError = _NotImplementedError3['default'];
 
-	var _NotUsedError2 = __webpack_require__(11);
+	var _NotUsedError2 = __webpack_require__(12);
 
 	var _NotUsedError3 = _interopRequireDefault(_NotUsedError2);
 
@@ -433,7 +434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jsonPointer = __webpack_require__(13);
+	var jsonPointer = __webpack_require__(14);
 
 	var protoJsonRefs = {
 		add: function(uri, subject) {
@@ -540,13 +541,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.types = {
 		'any': function() { return true; },
-		'array': __webpack_require__(16),
-		'boolean': __webpack_require__(17),
+		'array': __webpack_require__(17),
+		'boolean': __webpack_require__(18),
 		'integer': __webpack_require__(7),
-		'null': __webpack_require__(18),
+		'null': __webpack_require__(19),
 		'number': __webpack_require__(7),
-		'object': __webpack_require__(19),
-		'string': __webpack_require__(20)
+		'object': __webpack_require__(20),
+		'string': __webpack_require__(21)
 	};
 
 	exports.deepEqual = __webpack_require__(5);
@@ -643,9 +644,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _skeemas = __webpack_require__(12);
+	var _skeemas = __webpack_require__(13);
 
 	var _skeemas2 = _interopRequireDefault(_skeemas);
+
+	var _Outcome = __webpack_require__(9);
+
+	var _Outcome2 = _interopRequireDefault(_Outcome);
 
 	var _errors = __webpack_require__(3);
 
@@ -661,18 +666,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw new _errors.CommandNotInitializedError();
 	    }
 	  }, {
+	    key: 'runExplicit',
+	    value: function runExplicit() {
+	      throw new _errors.CommandNotInitializedError();
+	    }
+	  }, {
 	    key: '_run',
 	    value: function _run(Class) {
 	      return function run(inputs) {
-	        return new Promise(function promise(resolve, reject) {
-	          var validation = _skeemas2['default'].validate(inputs, Class.schema);
+	        var validation = _skeemas2['default'].validate(inputs, Class.schema);
+	        var result = validation.valid ? Class.execute(inputs) : null;
+	        return new _Outcome2['default'](validation.valid, result, validation.errors, inputs);
+	      };
+	    }
+	  }, {
+	    key: '_runExplicit',
+	    value: function _runExplicit(Class) {
+	      return function runExplicit(inputs) {
+	        var outcome = Class.run(inputs);
 
-	          if (validation.valid) {
-	            resolve(Class.execute(inputs));
-	          } else {
-	            reject(validation.errors);
-	          }
-	        });
+	        if (!outcome.success) throw new _errors.ValidationError(outcome.errors);
+
+	        return outcome.result;
 	      };
 	    }
 	  }, {
@@ -695,6 +710,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 9 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Outcome = function Outcome(success, result, errors, inputs) {
+	  _classCallCheck(this, Outcome);
+
+	  this.success = success;
+	  this.result = result;
+	  this.errors = errors;
+	  this.inputs = inputs;
+
+	  Object.freeze(this);
+	};
+
+	exports["default"] = Outcome;
+	module.exports = exports["default"];
+
+/***/ },
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -733,7 +774,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -772,7 +813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -811,11 +852,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var validators = __webpack_require__(6),
-		validationContext = __webpack_require__(14),
+		validationContext = __webpack_require__(15),
 		jsonRefs = __webpack_require__(4);
 
 	var protoValidator = {
@@ -885,7 +926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	function fastMap(array, fn) {
@@ -959,10 +1000,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var validationResult = __webpack_require__(15),
+	var validationResult = __webpack_require__(16),
 		jsonRefs = __webpack_require__(4);
 
 	var protoContext = {
@@ -1015,7 +1056,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	function errorToString() {
@@ -1047,7 +1088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var validateBase = __webpack_require__(2),
@@ -1190,7 +1231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	function validateBoolean(context, subject, schema) {
@@ -1208,7 +1249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	function validateNull(context, subject, schema) {
@@ -1226,7 +1267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var validateBase = __webpack_require__(2);
@@ -1425,10 +1466,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var decode = __webpack_require__(21).ucs2.decode;
+	var decode = __webpack_require__(22).ucs2.decode;
 
 
 	function minLength(context, subject, schema) {
@@ -1481,7 +1522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = require("punycode");
